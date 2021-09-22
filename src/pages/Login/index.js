@@ -16,13 +16,7 @@ export function LoginPage() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputForm control={control} name="username" placeholder="Usuário" />
 
-          <InputForm
-            control={control}
-            name="password"
-            placeholder="Senha"
-            isPassword
-            role="password"
-          />
+          <InputForm control={control} name="password" placeholder="Senha" isPassword />
 
           <Button type="primary" htmlType="submit">
             Fazer login

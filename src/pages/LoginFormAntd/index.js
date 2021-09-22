@@ -35,7 +35,6 @@ export function LoginFormAntd() {
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
-            role="password"
           />
         </Form.Item>
 
