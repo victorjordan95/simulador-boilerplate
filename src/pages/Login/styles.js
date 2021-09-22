@@ -1,51 +1,23 @@
 import styled from 'styled-components';
+import { Button as AntdButton } from 'antd';
 
 export const Container = styled.div`
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-
-  width: 100vw;
   height: 100vh;
+  width: 100vw;
 `;
 
 export const ContainerLogin = styled.div`
-  background: white;
-  max-width: 720px;
-
+  align-items: center;
+  background: #fff;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 32px;
+`;
 
-  border-radius: 5px;
-  padding: 2rem;
-
-  h2 {
-    margin-bottom: 2rem;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-
-    input {
-      width: 100%;
-      padding: 0 1.5rem;
-      height: 3rem;
-      border-radius: 0.25rem;
-
-      & + input {
-        margin-top: 1rem;
-      }
-    }
-
-    button {
-      width: 100%;
-      padding: 1rem;
-      height: 3rem;
-      margin-top: 1rem;
-      border-radius: 0.25rem;
-    }
-  }
+export const Button = styled(AntdButton)`
+  width: 100%;
 `;

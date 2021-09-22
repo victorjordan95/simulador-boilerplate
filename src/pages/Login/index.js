@@ -1,27 +1,58 @@
-import { Button } from 'antd';
-import { useForm } from 'react-hook-form';
-import { InputForm } from '../../components/forms/InputForm';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Checkbox, Form, Input } from 'antd';
 import * as S from './styles';
 
-export function LoginPage() {
-  const { control, handleSubmit } = useForm();
+export function Login() {
+  const onFinish = (values) => {
+    console.log('Success:', values);
+  };
 
-  const onSubmit = (data) => console.log(data);
+  const onFinishFailed = (errorInfo) => {
+    console.log('Failed:', errorInfo);
+  };
 
   return (
     <S.Container>
       <S.ContainerLogin>
         <h2>Login</h2>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <InputForm control={control} name="username" placeholder="Usuário" />
+        <Form
+          name="normal_login"
+          className="login-form"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+        >
+          <Form.Item
+            name="username"
+            rules={[{ required: true, message: 'Please input your Username!' }]}
+          >
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          </Form.Item>
 
-          <InputForm control={control} name="password" placeholder="Senha" isPassword />
+          <Form.Item
+            name="password"
+            rules={[{ required: true, message: 'Please input your Password!' }]}
+          >
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
 
-          <Button type="primary" htmlType="submit">
-            Fazer login
-          </Button>
-        </form>
+          <Form.Item>
+            <Form.Item name="remember" valuePropName="checked" noStyle>
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+          </Form.Item>
+
+          <Form.Item>
+            <S.Button type="primary" htmlType="submit" className="login-form-button">
+              Log in
+            </S.Button>
+          </Form.Item>
+        </Form>
       </S.ContainerLogin>
     </S.Container>
   );
