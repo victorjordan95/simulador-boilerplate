@@ -22,6 +22,7 @@ export function Login() {
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
+          size="large"
         >
           <Form.Item
             name="username"

@@ -15,7 +15,12 @@ export const ContainerLogin = styled.div`
   border-radius: 4px;
   display: flex;
   flex-direction: column;
+  min-width: 496px;
   padding: 32px;
+
+  h2 {
+    margin-bottom: 24px;
+  }
 `;
 
 export const Button = styled(AntdButton)`
