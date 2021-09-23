@@ -40,7 +40,7 @@ export function RegisterPasswordPage(){
             ]}
             hasFeedback
           >
-            <Input.Password placeholder="Password"/>
+            <Input.Password placeholder="New Password"/>
           </Form.Item>
 
           <Form.Item
