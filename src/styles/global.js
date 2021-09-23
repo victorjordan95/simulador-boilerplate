@@ -25,4 +25,12 @@ export const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  .pl-0 {
+    padding-left: 0;
+  }
+
+  .pr-0 {
+    padding-right: 0;
+  }
 `;
