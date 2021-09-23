@@ -1,11 +1,21 @@
-import { waitFor , fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { LoginFormAntd } from '.';
+import { act } from 'react-dom/test-utils';
+import { Login } from '.';
+
+const mockHistoryPush = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
 
 const setup = () => {
-  const utils = render(<LoginFormAntd />);
+  const utils = render(<Login />);
   const userInput = screen.getByRole('textbox');
-  const passwordInput = screen.getByRole('password');
+  const passwordInput = screen.getByPlaceholderText('Password');
   const button = screen.getByRole('button', { name: /Log in/i });
   return {
     userInput,
@@ -25,26 +35,34 @@ test('Show fields page', () => {
   expect(userInput).toBeInTheDocument();
 });
 
-// test('Should render button disabled', () => {});
-
 test('Should input values and call submit', async () => {
   const { userInput, passwordInput, button } = setup();
-  const onFinish = jest.fn();
 
-  fireEvent.change(userInput, { target: { value: 'username' } });
-  fireEvent.change(passwordInput, { target: { value: 'password' } });
+  await act(async () => {
+    fireEvent.change(userInput, { target: { value: 'email@test.com' } });
+    fireEvent.change(passwordInput, { target: { value: '1234567' } });
+  });
 
-  expect(userInput.value).toBe('username');
-  expect(passwordInput.value).toBe('password');
+  await act(async () => {
+    fireEvent.click(button);
+  });
 
-  fireEvent.submit(button);
-
-  // await waitFor(() =>
-  //   // expect(fetchSignInSpy).toHaveBeenCalledWith(seedEmail, seedPassword)
-  //   expect(onFinish).toBeCalled()
-  // );
+  expect(button).toBeDisabled();
+  await new Promise((r) => setTimeout(r, 2000));
+  expect(mockHistoryPush).toHaveBeenCalledWith('/dashboard');
 });
 
-// test('Show no username error', () => {});
+test('Show errors on try to submit without data', async () => {
+  const { button } = setup();
 
-// test('Show no password error', () => {});
+  await act(async () => {
+    fireEvent.submit(button);
+  });
+
+  expect(button).toBeDisabled();
+  await new Promise((r) => setTimeout(r, 2000));
+
+  const alertUser = screen.getAllByRole('alert');
+  console.log(alertUser.length);
+  expect(alertUser).toHaveLength(2);
+});

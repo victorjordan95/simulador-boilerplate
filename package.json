@@ -12,11 +12,12 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-react": "^7.26.0",
     "jest": "26.6.0",
+    "msw": "^0.35.0",
+    "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.15.4",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
-    "react": "^17.0.2",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.0.1"
   },
@@ -59,6 +60,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-react-native": "latest",
     "eslint-plugin-testing-library": "^4.12.1",
-    "prettier": "latest"
+    "prettier": "latest",
+    "react-test-renderer": "^17.0.2"
   }
 }
