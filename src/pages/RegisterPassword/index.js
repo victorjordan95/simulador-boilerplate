@@ -23,6 +23,11 @@ export function RegisterPasswordPage(){
     handleNavigateHome();
   };
 
+  const onFinishFailed = (errorInfo) => {
+    setError(true);
+    console.log('Failed:', errorInfo);
+  };
+
   return(
     <S.Container>
       <S.ContainerForm>
@@ -35,21 +40,20 @@ export function RegisterPasswordPage(){
           layout="vertical"
           size="large"
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
-          {history.location.pathname === '/registerPassword' && (
-            <Form.Item
-              name="current"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your current password!',
-                },
-              ]}
-              hasFeedback
-            >
-              <Input.Password placeholder="Current Password"/>
-            </Form.Item>
-          )}
+          <Form.Item
+            name="current"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your current password!',
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password placeholder="Current Password"/>
+          </Form.Item>
 
           <Form.Item
             name="password"
