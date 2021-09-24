@@ -17,11 +17,22 @@ export function Login() {
     }, 2000);
   };
 
+  const handleNavigateRegisterPassword = () => {
+    setTimeout(() => {
+      history.push('/registerPassword');
+      setIsLoading(false);
+    }, 2000);
+  };
+
   const onFinish = (values) => {
     setError(false);
     console.log('Success:', values);
     setIsLoading(true);
-    handleNavigateHome();
+    
+    // for Testing purposes
+    const firstAccess = true;
+    if (firstAccess) handleNavigateRegisterPassword();
+    else handleNavigateHome();
   };
 
   const onFinishFailed = (errorInfo) => {

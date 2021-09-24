@@ -10,6 +10,7 @@ export function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Login} />
+        <Route path="/resetPassword" exact component={RegisterPasswordPage} />
         <PrivateRoute path="/dashboard" component={DashboardPage} />
         <PrivateRoute path="/registerPassword" exact component={RegisterPasswordPage} />
       </Switch>
