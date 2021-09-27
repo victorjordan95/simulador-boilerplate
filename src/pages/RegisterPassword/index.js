@@ -1,21 +1,46 @@
+import { useState } from 'react';
 import { Form, Input } from 'antd';
+import { useHistory } from 'react-router-dom';
 import * as S from './styles';
 
 export function RegisterPasswordPage(){
+  const history = useHistory();
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleNavigateHome = () => {
+    setTimeout(() => {
+      history.push('/dashboard');
+      setIsLoading(false);
+    }, 2000);
+  };
+
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
+    setError(false);
+    console.log('Success:', values);
+    setIsLoading(true);
+    handleNavigateHome();
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    setError(true);
+    console.log('Failed:', errorInfo);
   };
 
   return(
     <S.Container>
       <S.ContainerForm>
-        <h2>Register Password</h2>
+        <h2>
+          { `${history.location.pathname === '/registerPassword' ? 'Change' : 'Reset'} your Password` }
+        </h2>
 
         <Form
           name="register"
           layout="vertical"
           size="large"
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
           <Form.Item
             name="current"
@@ -29,7 +54,7 @@ export function RegisterPasswordPage(){
           >
             <Input.Password placeholder="Current Password"/>
           </Form.Item>
-          
+
           <Form.Item
             name="password"
             rules={[
@@ -40,7 +65,7 @@ export function RegisterPasswordPage(){
             ]}
             hasFeedback
           >
-            <Input.Password placeholder="Password"/>
+            <Input.Password placeholder="New Password"/>
           </Form.Item>
 
           <Form.Item
@@ -66,7 +91,7 @@ export function RegisterPasswordPage(){
           </Form.Item>
 
           <Form.Item>
-            <S.Button type="primary" htmlType="submit" className="login-form-button">
+            <S.Button type="primary" htmlType="submit" className="login-form-button" disabled={(error && true) || isLoading}>
               Save
             </S.Button>
           </Form.Item>
