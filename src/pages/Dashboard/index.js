@@ -66,18 +66,13 @@ export function DashboardPage() {
             subTitle="This is a subtitle"
             tags={<Tag color="blue">Running</Tag>}
             extra={[
-              <Button key="3">Operation</Button>,
+              <S.ActionButton key="3">+ Cadastrar</S.ActionButton>,
               <Button key="2">Operation</Button>,
               <Button key="1" type="primary">
                 Primary
               </Button>,
               <Dropdown key="more" overlay={menu}>
-                <Button
-                  style={{
-                    border: 'none',
-                    padding: 0,
-                  }}
-                >
+                <Button>
                   <EllipsisOutlined
                     style={{
                       fontSize: 20,

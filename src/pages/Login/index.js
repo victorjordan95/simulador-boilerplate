@@ -1,33 +1,10 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Checkbox, Form, Input } from 'antd';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import * as S from './styles';
+import { useLogin } from './useLogin';
 
 export function Login() {
-  const history = useHistory();
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  const handleNavigateHome = () => {
-    setTimeout(() => {
-      history.push('/dashboard');
-      setIsLoading(false);
-    }, 2000);
-  };
-
-  const onFinish = (values) => {
-    setError(false);
-    console.log('Success:', values);
-    setIsLoading(true);
-    handleNavigateHome();
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    setError(true);
-    console.log('Failed:', errorInfo);
-  };
+  const { onFinish, onFinishFailed, error, isLoading } = useLogin();
 
   return (
     <S.Container>
